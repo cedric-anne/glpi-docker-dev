@@ -1,0 +1,14 @@
+version: "3.5"
+
+services:
+    adminer:
+        image: "adminer"
+        restart: "${UTILITIES_CONTAINERS_RESTART_POLICY:-unless-stopped}"
+        ports:
+            - "8080:8080"
+    mail:
+        image: "mailhog/mailhog"
+        restart: "${UTILITIES_CONTAINERS_RESTART_POLICY:-unless-stopped}"
+        ports:
+            - "1025:1025"
+            - "8025:8025"

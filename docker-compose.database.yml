@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+    db:
+        container_name: "${DATABASE_CONTAINER_NAME:-glpi_db}"
+        restart: "${DATABASE_CONTAINER_RESTART_POLICY:-unless-stopped}"
+        image: "mariadb:10.3"
+        environment:
+            MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+            MYSQL_DATABASE: "${MYSQL_DATABASE:-glpi}"
+            MYSQL_USER: "${MYSQL_USER:-glpi}"
+            MYSQL_PASSWORD: "${MYSQL_PASSWORD:-glpi}"
+        ports:
+            - "3306:3306"
+        volumes:
+            - type: "bind"
+              source: "${DATABASE_PATH:-../glpi_db}"
+              target: "/var/lib/mysql"
+
+networks:
+    default:
+        driver: "bridge"
+        name: "${NETWORK_NAME:-glpi_bridge}"

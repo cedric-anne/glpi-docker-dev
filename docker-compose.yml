@@ -1,0 +1,22 @@
+version: "3.5"
+
+services:
+    application:
+        container_name: "${APPLICATION_CONTAINER_NAME:-glpi}"
+        restart: "${APPLICATION_CONTAINER_RESTART_POLICY:-unless-stopped}"
+        build:
+            context: "glpi"
+            args:
+                HOST_GROUP_ID: "${HOST_GROUP_ID:-1000}"
+                HOST_USER_ID: "${HOST_USER_ID:-1000}"
+        ports:
+            - "80:80"
+        volumes:
+            - type: "bind"
+              source: "${APPLICATION_PATH:-../glpi}"
+              target: "/var/www/glpi"
+
+networks:
+    default:
+        driver: "bridge"
+        name: "${NETWORK_NAME:-glpi_bridge}"
