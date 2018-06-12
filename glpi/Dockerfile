@@ -32,6 +32,10 @@ RUN apt-get update \
   # Install mysqli PHP extension.
   && docker-php-ext-install mysqli \
   \
+  # Install soap PHP extension (required for some plugins).
+  && apt-get install --assume-yes --no-install-recommends --quiet libxml2-dev \
+  && docker-php-ext-install soap \
+  \
   # Install xmlrpc PHP extension.
   && apt-get install --assume-yes --no-install-recommends --quiet libxml2-dev \
   && docker-php-ext-install xmlrpc \
