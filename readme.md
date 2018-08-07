@@ -96,3 +96,5 @@ SMTP server will be reachable by your GLPI applicating using the `mail` host on 
 
 The PHP `mail` function is configured to send messages to a `ssmtp` instance which will forward them to `MailHog`.
 
+## SMTP (namshi/smtp)
+A SMTP server that can be used for the `release mail` function of `MailHog`.
