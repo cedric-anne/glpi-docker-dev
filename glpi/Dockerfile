@@ -14,6 +14,11 @@ VOLUME /home/www-data
 
 RUN apt-get update \
   \
+  # Install APCU PHP extension.
+  && pecl install apcu \
+  && docker-php-ext-enable apcu \
+  && echo "apc.enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini \
+  \
   # Install gd PHP extension.
   && apt-get install --assume-yes --no-install-recommends --quiet libfreetype6-dev libjpeg-dev libpng-dev \
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -24,6 +29,11 @@ RUN apt-get update \
   && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
   && docker-php-ext-install imap \
   \
+  # Install intl PHP extension.
+  && apt-get install --assume-yes --no-install-recommends --quiet libicu-dev \
+  && docker-php-ext-configure intl \
+  && docker-php-ext-install intl \
+  \
   # Install ldap PHP extension.
   && apt-get install --assume-yes --no-install-recommends --quiet libldap2-dev \
   && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
@@ -31,6 +41,9 @@ RUN apt-get update \
   \
   # Install mysqli PHP extension.
   && docker-php-ext-install mysqli \
+  \
+  # Install PDO MySQL PHP extension.
+  && docker-php-ext-install pdo pdo_mysql \
   \
   # Install soap PHP extension (required for some plugins).
   && apt-get install --assume-yes --no-install-recommends --quiet libxml2-dev \
@@ -45,6 +58,12 @@ RUN apt-get update \
   \
   # Install composer.
   && curl --silent --show-error https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+  \
+  # Install nodejs and npm.
+  && apt-get install --assume-yes --no-install-recommends --quiet gnupg \
+  && curl --silent --location https://deb.nodesource.com/setup_8.x | bash - \
+  && apt-get install --assume-yes --no-install-recommends --quiet nodejs \
+  && npm install -g npm \
   \
   # Install git and zip used by composer when fetching dependencies.
   && apt-get install --assume-yes --no-install-recommends --quiet git unzip \
