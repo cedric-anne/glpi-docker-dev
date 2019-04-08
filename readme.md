@@ -42,6 +42,7 @@ All variables are described in the following tables and have default values that
 | Variable name | Description | Default value |
 | --- | --- | --- |
 | `DATABASE_CONTAINER_NAME` | Container name. Can be used to identify container when using `docker` and `docker-compose` commands. | `glpi_db` |
+| `DATABASE_CONTAINER_IMAGE` | Container image to use. | `mariadb:10.4` |
 | `DATABASE_CONTAINER_RESTART_POLICY` | [Restart policy.](https://docs.docker.com/config/containers/start-containers-automatically/) | `unless-stopped` |
 | `DATABASE_PATH` | Root path of database files. Will be mounted in `/var/lib/mysql`. If path is empty, container will initialize a new database at startup. | `../glpi_db` |
 | `MYSQL_DATABASE` | Name of database that will be created on database initialization. | `glpi` |

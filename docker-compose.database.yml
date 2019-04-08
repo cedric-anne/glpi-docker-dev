@@ -4,7 +4,7 @@ services:
     db:
         container_name: "${DATABASE_CONTAINER_NAME:-glpi_db}"
         restart: "${DATABASE_CONTAINER_RESTART_POLICY:-unless-stopped}"
-        image: "mariadb:10.3"
+        image: "${DATABASE_CONTAINER_IMAGE:-mariadb:10.4}"
         environment:
             MYSQL_RANDOM_ROOT_PASSWORD: "yes"
             MYSQL_DATABASE: "${MYSQL_DATABASE:-glpi}"
