@@ -19,6 +19,9 @@ RUN apt-get update \
   && docker-php-ext-enable apcu \
   && echo "apc.enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini \
   \
+  # Install exif extension.
+  && docker-php-ext-install exif \
+  \
   # Install gd PHP extension.
   && apt-get install --assume-yes --no-install-recommends --quiet libfreetype6-dev libjpeg-dev libpng-dev \
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
