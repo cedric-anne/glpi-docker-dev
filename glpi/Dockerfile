@@ -66,7 +66,6 @@ RUN apt-get update \
   && apt-get install --assume-yes --no-install-recommends --quiet gnupg \
   && curl --silent --location https://deb.nodesource.com/setup_10.x | bash - \
   && apt-get install --assume-yes --no-install-recommends --quiet nodejs \
-  && npm install -g npm \
   \
   # Install git and zip used by composer when fetching dependencies.
   && apt-get install --assume-yes --no-install-recommends --quiet git unzip \
