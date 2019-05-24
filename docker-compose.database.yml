@@ -14,8 +14,11 @@ services:
             - "3306:3306"
         volumes:
             - type: "bind"
-              source: "${DATABASE_PATH:-../glpi_db}"
+              source: "${DATABASE_STORAGE_PATH:-./mounts/db/var/lib/mysql}"
               target: "/var/lib/mysql"
+            - type: "bind"
+              source: "${DATABASE_CONFIG_PATH:-./mounts/db/etc/mysql/conf.d/custom.cnf}"
+              target: "/etc/mysql/conf.d/custom.cnf"
 
 networks:
     default:

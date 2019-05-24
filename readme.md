@@ -32,7 +32,7 @@ All variables are described in the following tables and have default values that
 | `APPLICATION_CONTAINER_NAME` | Container name. Can be used to identify container when using `docker` and `docker-compose` commands. | `glpi` |
 | `APPLICATION_CONTAINER_RESTART_POLICY` | [Restart policy.](https://docs.docker.com/config/containers/start-containers-automatically/) | `unless-stopped` |
 | `APPLICATION_HTTP_PORT` | Http port listened by container. Can be changed to prevent conflicts between multiple containers. | `80` |
-| `APPLICATION_PATH` | Root path of application source. Will be mounted in `/var/www/glpi`. | `../glpi` |
+| `APPLICATION_PATH` | Root path of application source. Will be mounted in `/var/www/glpi`. | `./mounts/application/var/www/glpi` |
 | `HOST_GROUP_ID` | Group id used by `Apache` group. Should have the same value as group used in host system to access files in order to prevent permission conflicts. | `1000` |
 | `HOST_USER_ID` | User id used by `Apache` user. Should have the same value as user used in host system to access files in order to prevent permission conflicts. | `1000` |
 | `NETWORK_NAME` | Network name. Can be used in `docker network` commands, for example if you need to connect a tier container to GLPI API. | `glpi_bridge` |
@@ -44,7 +44,8 @@ All variables are described in the following tables and have default values that
 | `DATABASE_CONTAINER_NAME` | Container name. Can be used to identify container when using `docker` and `docker-compose` commands. | `glpi_db` |
 | `DATABASE_CONTAINER_IMAGE` | Container image to use. | `mariadb:10.4` |
 | `DATABASE_CONTAINER_RESTART_POLICY` | [Restart policy.](https://docs.docker.com/config/containers/start-containers-automatically/) | `unless-stopped` |
-| `DATABASE_PATH` | Root path of database files. Will be mounted in `/var/lib/mysql`. If path is empty, container will initialize a new database at startup. | `../glpi_db` |
+| `DATABASE_CONFIG_PATH` | Path of database custom configuration file. Will be mounted in `/etc/mysql/conf.d/custom.cnf`. | `./mounts/db/etc/mysql/conf.d/custom.cnf` |
+| `DATABASE_STORAGE_PATH` | Root path of database storage files. Will be mounted in `/var/lib/mysql`. If path is empty, container will initialize a new database at startup. | `./mounts/db/var/lib/mysql` |
 | `MYSQL_DATABASE` | Name of database that will be created on database initialization. | `glpi` |
 | `MYSQL_PASSWORD` | Password of user that will be created on database initialization. | `glpi` |
 | `MYSQL_USER` | Name of user that will be created on database initialization. | `glpi` |
