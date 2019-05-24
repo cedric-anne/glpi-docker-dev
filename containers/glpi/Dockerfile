@@ -1,4 +1,4 @@
-FROM php:7.2-apache-stretch
+FROM php:7.3-apache-stretch
 
 # Workaround to make apache use same UID/GID as host user.
 ARG HOST_GROUP_ID=1000
