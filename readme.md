@@ -30,6 +30,7 @@ All variables are described in the following tables and have default values that
 | Variable name | Description | Default value |
 | --- | --- | --- |
 | `APPLICATION_CONTAINER_NAME` | Container name. Can be used to identify container when using `docker` and `docker-compose` commands. | `glpi` |
+| `APPLICATION_CONTAINER_BASE_IMAGE` | Container base image. | `php:apache-buster` |
 | `APPLICATION_CONTAINER_RESTART_POLICY` | [Restart policy.](https://docs.docker.com/config/containers/start-containers-automatically/) | `unless-stopped` |
 | `APPLICATION_HTTP_PORT` | Http port listened by container. Can be changed to prevent conflicts between multiple containers. | `80` |
 | `APPLICATION_PATH` | Root path of application source. Will be mounted in `/var/www/glpi`. | `./mounts/application/var/www/glpi` |

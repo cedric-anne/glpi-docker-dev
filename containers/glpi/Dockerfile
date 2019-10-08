@@ -1,4 +1,6 @@
-FROM php:7.3-apache-stretch
+ARG BASE_IMAGE=php:apache-buster
+
+FROM $BASE_IMAGE
 
 # Workaround to make apache use same UID/GID as host user.
 ARG HOST_GROUP_ID=1000
@@ -29,7 +31,7 @@ RUN apt-get update \
   \
   # Install imap PHP extension.
   && apt-get install --assume-yes --no-install-recommends --quiet libc-client-dev libkrb5-dev \
-  && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
+  && PHP_OPENSSL=yes docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
   && docker-php-ext-install imap \
   \
   # Install intl PHP extension.
@@ -71,7 +73,7 @@ RUN apt-get update \
   && apt-get install --assume-yes --no-install-recommends --quiet git unzip \
   \
   # Install ssmtp to forward emails dedicated mail container.
-  && apt-get install --assume-yes --no-install-recommends --quiet ssmtp \
+  && (apt-get install --assume-yes --no-install-recommends --quiet ssmtp || echo "Unable to install ssmtp") \
   \
   # Install gettext used for translation files.
   && apt-get install --assume-yes --no-install-recommends --quiet gettext \
