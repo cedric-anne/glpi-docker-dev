@@ -15,3 +15,8 @@ services:
     smtp:
         image: "namshi/smtp"
         restart: "${UTILITIES_CONTAINERS_RESTART_POLICY:-unless-stopped}"
+
+networks:
+    default:
+        driver: "bridge"
+        name: "${NETWORK_NAME:-glpi_bridge}"
