@@ -107,6 +107,8 @@ COPY ./files /
 # Install GLPI crontab.
 RUN crontab -u www-data /etc/cron.d/glpi
 
+WORKDIR /var/www/glpi
+
 # Make startup script executable and executes it as default command.
 RUN chmod u+x /opt/startup.sh
 CMD /opt/startup.sh
