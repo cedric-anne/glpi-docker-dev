@@ -102,7 +102,11 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 # Copy files to container.
-COPY ./files /
+COPY ./files/etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY ./files/etc/cron.d/glpi /etc/cron.d/glpi
+COPY ./files/etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf
+COPY ./files/opt/startup.sh /opt/startup.sh
+COPY ./files/usr/local/etc/php/php.ini /usr/local/etc/php/php.ini
 
 # Install GLPI crontab.
 RUN crontab -u www-data /etc/cron.d/glpi
