@@ -10,6 +10,10 @@ services:
                 BASE_IMAGE: "${APPLICATION_CONTAINER_BASE_IMAGE:-php:apache-buster}"
                 HOST_GROUP_ID: "${HOST_GROUP_ID:-1000}"
                 HOST_USER_ID: "${HOST_USER_ID:-1000}"
+        networks:
+            default:
+                aliases:
+                    - "${APPLICATION_NETWORK_ALIAS:-glpi.local}"
         ports:
             - "${APPLICATION_HTTP_PORT:-80}:80"
         volumes:
