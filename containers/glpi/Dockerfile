@@ -67,6 +67,9 @@ RUN apt-get update \
   && apt-get install --assume-yes --no-install-recommends --quiet libxml2-dev \
   && docker-php-ext-install xmlrpc \
   \
+  # Enable apache mods.
+  && a2enmod rewrite \
+  \
   # Install cron service.
   && apt-get install --assume-yes --no-install-recommends --quiet cron \
   \
