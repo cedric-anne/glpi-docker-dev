@@ -56,6 +56,9 @@ RUN apt-get update \
   # Install mysqli PHP extension.
   && docker-php-ext-install mysqli \
   \
+  # Install pcntl PHP extension (required for composer-require-checker).
+  && docker-php-ext-install pcntl \
+  \
   # Install PDO MySQL PHP extension.
   && docker-php-ext-install pdo pdo_mysql \
   \
