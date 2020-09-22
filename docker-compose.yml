@@ -18,6 +18,9 @@ services:
             - "${APPLICATION_HTTP_PORT:-80}:80"
         volumes:
             - type: "bind"
+              source: "${APPLICATION_HOME:-./mounts/application/home/www-data}"
+              target: "/home/www-data"
+            - type: "bind"
               source: "${APPLICATION_PATH:-./mounts/application/var/www/glpi}"
               target: "/var/www/glpi"
 
