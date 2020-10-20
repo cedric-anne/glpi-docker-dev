@@ -16,6 +16,10 @@ VOLUME /home/www-data
 
 RUN apt-get update \
   \
+  # Install bz2 extension (for marketplace).
+  && apt-get install --assume-yes --no-install-recommends --quiet libbz2-dev \
+  && docker-php-ext-install bz2 \
+  \
   # Install APCU PHP extension.
   && if [ $PHP_MAJOR_VERSION -eq "5" ]; then \
     # For PHP 5.x, install apcu 4.0.x using PECL util
