@@ -115,9 +115,6 @@ RUN apt-get update \
   # Install git and zip used by composer when fetching dependencies.
   && apt-get install --assume-yes --no-install-recommends --quiet git unzip \
   \
-  # Install ssmtp to forward emails dedicated mail container.
-  && (apt-get install --assume-yes --no-install-recommends --quiet ssmtp || echo "Unable to install ssmtp") \
-  \
   # Install gettext used for translation files.
   && apt-get install --assume-yes --no-install-recommends --quiet gettext \
   \
@@ -141,9 +138,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 # Copy files to container.
 COPY ./files/etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY ./files/etc/cron.d/glpi /etc/cron.d/glpi
-COPY ./files/etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf
 COPY ./files/opt/startup.sh /opt/startup.sh
-COPY ./files/usr/local/etc/php/php.ini /usr/local/etc/php/php.ini
 
 # Install GLPI crontab.
 RUN crontab -u www-data /etc/cron.d/glpi

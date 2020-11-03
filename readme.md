@@ -99,7 +99,5 @@ An instance of `MailHog`, a SMTP server which catches any message sent to it to 
 
 SMTP server will be reachable by your GLPI applicating using the `mail` host on port `1025`.
 
-The PHP `mail` function is configured to send messages to a `ssmtp` instance which will forward them to `MailHog`.
-
 ## SMTP (namshi/smtp)
 A SMTP server that can be used for the `release mail` function of `MailHog`.
