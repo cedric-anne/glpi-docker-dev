@@ -1,5 +1,11 @@
 ARG BASE_IMAGE=php:apache-buster
 
+
+#####
+# Fetch composer latest build
+#####
+FROM composer:latest AS composer
+
 FROM $BASE_IMAGE
 
 # Workaround to make apache use same UID/GID as host user.
@@ -101,9 +107,6 @@ RUN apt-get update \
   # Install cron service.
   && apt-get install --assume-yes --no-install-recommends --quiet cron \
   \
-  # Install composer.
-  && curl --silent --show-error https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-  \
   # Install nodejs and npm.
   && apt-get install --assume-yes --no-install-recommends --quiet gnupg \
   && curl --silent --location https://deb.nodesource.com/setup_10.x | bash - \
@@ -131,6 +134,9 @@ RUN apt-get update \
   \
   # Clean sources list
   && rm -rf /var/lib/apt/lists/*
+
+# Copy composer binary
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Copy files to container.
 COPY ./files/etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
