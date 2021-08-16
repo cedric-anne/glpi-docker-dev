@@ -21,6 +21,8 @@ RUN mkdir --parents /home/www-data \
 VOLUME /home/www-data
 
 RUN apt-get update \
+  && PHP_MAJOR_VERSION="$(echo $PHP_VERSION | cut -d '.' -f 1)" \
+  && PHP_MINOR_VERSION="$(echo $PHP_VERSION | cut -d '.' -f 2)" \
   \
   # Install bz2 extension (for marketplace).
   && apt-get install --assume-yes --no-install-recommends --quiet libbz2-dev \
@@ -38,8 +40,6 @@ RUN apt-get update \
   # GD extension configuration parameters changed on PHP 7.4
   # see https://www.php.net/manual/en/image.installation.php#image.installation
   && apt-get install --assume-yes --no-install-recommends --quiet libfreetype6-dev libjpeg-dev libpng-dev \
-  && PHP_MAJOR_VERSION="$(echo $PHP_VERSION | cut -d '.' -f 1)" \
-  && PHP_MINOR_VERSION="$(echo $PHP_VERSION | cut -d '.' -f 2)" \
   && if [ $PHP_MAJOR_VERSION -le "5" ] || ([ $PHP_MAJOR_VERSION -eq "7" ] && [ $PHP_MINOR_VERSION -le "3" ]); then \
     # For PHP <= 5.x or PHP 7 <= 7.3, use old parameters
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -98,6 +98,16 @@ RUN apt-get update \
     && docker-php-ext-install /tmp/xmlrpc \
     && rm -rf /tmp/xmlrpc \
   ; fi \
+  \
+  # Install zip PHP extension (for marketplace).
+  # Zip extension configuration parameters changed on PHP 7.3
+  # see https://www.php.net/manual/en/zip.installation.php#zip.installation
+  && apt-get install --assume-yes --no-install-recommends --quiet libzip-dev zip \
+  && if [ $PHP_MAJOR_VERSION -le "5" ] || ([ $PHP_MAJOR_VERSION -eq "7" ] && [ $PHP_MINOR_VERSION -le "2" ]); then \
+    # For PHP <= 5.x or PHP 7 <= 7.2, configure command must be done
+    docker-php-ext-configure zip --with-libzip \
+  ; fi \
+  && docker-php-ext-install zip \
   \
   # Enable apache mods.
   && a2enmod rewrite \
