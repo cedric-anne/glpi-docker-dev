@@ -7,14 +7,11 @@ services:
         ports:
             - "8080:8080"
     mail:
-        image: "mailhog/mailhog"
+        image: "msztolcman/sendria:v2.2.2.0"
         restart: "${UTILITIES_CONTAINERS_RESTART_POLICY:-unless-stopped}"
         ports:
             - "1025:1025"
-            - "8025:8025"
-    smtp:
-        image: "namshi/smtp"
-        restart: "${UTILITIES_CONTAINERS_RESTART_POLICY:-unless-stopped}"
+            - "8025:1080"
     memcached:
         image: "memcached"
         restart: "${UTILITIES_CONTAINERS_RESTART_POLICY:-unless-stopped}"
