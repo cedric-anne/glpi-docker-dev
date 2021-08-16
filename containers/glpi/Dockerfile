@@ -63,6 +63,11 @@ RUN apt-get update \
   && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
   && docker-php-ext-install ldap \
   \
+  # Install memcached PHP extension.
+  && apt-get install --assume-yes --no-install-recommends --quiet libmemcached-dev \
+  && pecl install memcached \
+  && docker-php-ext-enable memcached \
+  \
   # Install mysqli PHP extension.
   && docker-php-ext-install mysqli \
   \
@@ -71,6 +76,10 @@ RUN apt-get update \
   \
   # Install PDO MySQL PHP extension.
   && docker-php-ext-install pdo pdo_mysql \
+  \
+  # Install redis PHP extension.
+  && pecl install redis \
+  && docker-php-ext-enable redis \
   \
   # Install soap PHP extension (required for some plugins).
   && apt-get install --assume-yes --no-install-recommends --quiet libxml2-dev \

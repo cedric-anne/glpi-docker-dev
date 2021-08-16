@@ -15,6 +15,12 @@ services:
     smtp:
         image: "namshi/smtp"
         restart: "${UTILITIES_CONTAINERS_RESTART_POLICY:-unless-stopped}"
+    memcached:
+        image: "memcached"
+        restart: "${UTILITIES_CONTAINERS_RESTART_POLICY:-unless-stopped}"
+    redis:
+        image: "redis"
+        restart: "${UTILITIES_CONTAINERS_RESTART_POLICY:-unless-stopped}"
 
 networks:
     default:
