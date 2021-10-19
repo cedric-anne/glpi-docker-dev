@@ -28,11 +28,6 @@ RUN apt-get update \
   && apt-get install --assume-yes --no-install-recommends --quiet libbz2-dev \
   && docker-php-ext-install bz2 \
   \
-  # Install APCU PHP extension.
-  && pecl install apcu \
-  && docker-php-ext-enable apcu \
-  && echo "apc.enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini \
-  \
   # Install exif extension.
   && docker-php-ext-install exif \
   \
@@ -47,11 +42,6 @@ RUN apt-get update \
     docker-php-ext-configure gd --with-freetype --with-jpeg \
   ; fi \
   && docker-php-ext-install gd \
-  \
-  # Install imap PHP extension.
-  && apt-get install --assume-yes --no-install-recommends --quiet libc-client-dev libkrb5-dev \
-  && PHP_OPENSSL=yes docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
-  && docker-php-ext-install imap \
   \
   # Install intl PHP extension.
   && apt-get install --assume-yes --no-install-recommends --quiet libicu-dev \
@@ -73,9 +63,6 @@ RUN apt-get update \
   \
   # Install pcntl PHP extension (required for composer-require-checker).
   && docker-php-ext-install pcntl \
-  \
-  # Install PDO MySQL PHP extension.
-  && docker-php-ext-install pdo pdo_mysql \
   \
   # Install redis PHP extension.
   && pecl install redis \
