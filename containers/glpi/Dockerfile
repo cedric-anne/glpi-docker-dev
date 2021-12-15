@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=php:apache-buster
+ARG BASE_IMAGE=php:apache-bullseye
 
 
 #####
@@ -113,13 +113,9 @@ RUN apt-get update \
   # Install gettext used for translation files.
   && apt-get install --assume-yes --no-install-recommends --quiet gettext \
   \
-  # Install python, pip and setuptools
-  && apt-get install --assume-yes --no-install-recommends --quiet python python-pip \
-  && pip install --quiet setuptools \
-  \
   # Install dependencies for plugin release tool
-  && apt-get install --assume-yes --no-install-recommends --quiet gpg python-lxml \
-  && pip install --quiet gitdb gitpython pygithub termcolor \
+  && apt-get install --assume-yes --no-install-recommends --quiet gpg python3 python3-git python3-gitdb python3-github python3-lxml python3-termcolor \
+  && ln -s /usr/bin/python3 /usr/bin/python \
   \
   # Install transifex client
   && apt-get install --assume-yes --no-install-recommends --quiet transifex-client \
