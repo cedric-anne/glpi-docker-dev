@@ -118,7 +118,7 @@ RUN apt-get update \
   && ln -s /usr/bin/python3 /usr/bin/python \
   \
   # Install transifex client
-  && apt-get install --assume-yes --no-install-recommends --quiet transifex-client \
+  && (cd /usr/local/bin/ && curl --silent --location https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash) \
   \
   # Clean sources list
   && rm -rf /var/lib/apt/lists/*
