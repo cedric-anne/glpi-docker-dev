@@ -61,6 +61,9 @@ RUN apt-get update \
   # Install mysqli PHP extension.
   && docker-php-ext-install mysqli \
   \
+  # Install opcache PHP extension.
+  && docker-php-ext-install opcache \
+  \
   # Install pcntl PHP extension (required for composer-require-checker).
   && docker-php-ext-install pcntl \
   \
