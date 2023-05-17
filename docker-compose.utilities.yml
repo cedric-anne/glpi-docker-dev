@@ -15,6 +15,18 @@ services:
     memcached:
         image: "memcached"
         restart: "${UTILITIES_CONTAINERS_RESTART_POLICY:-unless-stopped}"
+    openldap:
+        image: "osixia/openldap"
+        environment:
+            LDAP_DOMAIN: "glpi.org"
+        restart: "${UTILITIES_CONTAINERS_RESTART_POLICY:-unless-stopped}"
+    phpldapadmin:
+        image: "osixia/phpldapadmin"
+        environment:
+            PHPLDAPADMIN_LDAP_HOSTS: "openldap"
+        ports:
+            - "8443:443"
+        restart: "${UTILITIES_CONTAINERS_RESTART_POLICY:-unless-stopped}"
     redis:
         image: "redis"
         restart: "${UTILITIES_CONTAINERS_RESTART_POLICY:-unless-stopped}"
