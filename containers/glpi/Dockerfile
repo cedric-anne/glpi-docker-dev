@@ -138,6 +138,10 @@ COPY ./files/opt/startup.sh /opt/startup.sh
 # Install GLPI crontab.
 RUN crontab -u www-data /etc/cron.d/glpi
 
+# Define GLPI environment variables
+ENV \
+  GLPI_ENVIRONMENT_TYPE=development
+
 WORKDIR /var/www/glpi
 
 # Make startup script executable and executes it as default command.
