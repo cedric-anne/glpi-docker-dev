@@ -123,6 +123,9 @@ RUN apt-get update \
   # Install transifex client
   && (cd /usr/local/bin/ && curl --silent --location https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash) \
   \
+  # Install nano, as one may use it to update system files.
+  && apt-get install --assume-yes --no-install-recommends --quiet nano \
+  \
   # Clean sources list
   && rm -rf /var/lib/apt/lists/*
 
