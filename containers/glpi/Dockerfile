@@ -107,7 +107,10 @@ RUN apt-get update \
   \
   # Install nodejs and npm.
   && apt-get install --assume-yes --no-install-recommends --quiet gnupg \
-  && curl --silent --location https://deb.nodesource.com/setup_16.x | bash - \
+  && mkdir -p /etc/apt/keyrings \
+  && curl --fail --silent --show-error --location https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor --output /etc/apt/keyrings/nodesource.gpg \
+  && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list \
+  && apt-get update \
   && apt-get install --assume-yes --no-install-recommends --quiet nodejs \
   \
   # Install git and zip used by composer when fetching dependencies.
